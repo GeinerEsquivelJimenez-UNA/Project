@@ -2,6 +2,17 @@
 
 Menu::Menu(float width, float hight) {
 
+	this->width = width;
+	this->hight = hight;
+
+}
+
+Menu::~Menu() {
+
+}
+
+void Menu::options() {
+
 	Font* font = new Font();
 
 	if (!font->loadFromFile("stocky.ttf")) {
@@ -30,13 +41,12 @@ Menu::Menu(float width, float hight) {
 	mainMenu[2].setPosition(Vector2f(width / 4 - 50, hight / (Max_menu + 1) * 3));
 
 	mainMenuSelected = 0;
-}
-
-Menu::~Menu() {
 
 }
 
 void Menu::draw(RenderWindow& window) {
+
+
 
 	for (int i = 0; i < 3; i++) {
 
@@ -74,16 +84,29 @@ void Menu::moveUp() {
 	}
 }
 
+void Menu::buttons(RenderWindow &window) {
+
+	button.setPosition(200, 250);
+	button.setSize(Vector2f(100.f, 00.f));
+	button.setScale(Vector2f(0.5f, 0.5f));
+	button.setFillColor(Color::Blue);
+	button.setOutlineColor(Color::Green);
+	button.setOutlineThickness(1.f);
+	window.draw(button);
+
+}
+
 void Menu::useKeyboard(RenderWindow& window) {
 
 	Event event;
+
 	while (window.pollEvent(event)) {
 
 		if (event.type == Event::Closed) {
 			window.close();
 		}
 		if (event.type == Event::KeyReleased) {
-
+	
 			if (event.key.code == Keyboard::Up) {
 				moveUp();
 				break;
@@ -96,20 +119,31 @@ void Menu::useKeyboard(RenderWindow& window) {
 	}
 }
 
-void Menu::selectOption() {
+void Menu::useMouse(RenderWindow& window) {
+
+		std::cout << "Mouse pos: " 
+		<< Mouse::getPosition(window).x << "  " 
+		<< Mouse::getPosition(window).y << "\n ";
+
+}
+
+void Menu::selectOption(RenderWindow &window) {
 
 	//select option
 	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 0) {
 
-		std::cout << "Play";
+		game->playGame(window);
+
 	}
 
 	//slect options
-	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 1) {
+	
+	 if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 1) {
 
 		std::cout << "Options";
 	}
 
+	
 	//Salir
 	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 2) {
 
@@ -117,7 +151,7 @@ void Menu::selectOption() {
 	}
 }
 
-void Menu::showWindow(RenderWindow& window) {
+void Menu::showMenu(RenderWindow& window) {
 
 	Texture textura;
 	if (!textura.loadFromFile("kratos.jpg"))
@@ -129,15 +163,17 @@ void Menu::showWindow(RenderWindow& window) {
 	Sprite imagenDeMenu;
 	imagenDeMenu.setTexture(textura);
 
-	while (window.isOpen()) {
+	useKeyboard(window);
+	//useMouse(window);
 
-		useKeyboard(window);
-		selectOption();
+	selectOption(window);
 
-		window.clear();
-		window.draw(imagenDeMenu);
-		draw(window);
-		window.display();
-	}
+	window.clear();
+	window.draw(imagenDeMenu);
+	draw(window);
+	window.display();
+
+	std::cout << "*";
+	
 
 }

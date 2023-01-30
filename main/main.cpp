@@ -8,12 +8,16 @@ using namespace sf;
 
 int main() {
 
-	RenderWindow window(VideoMode(1280, 800), "zoid.jpg");
+	RenderWindow window(VideoMode(1280, 800), "Battle of Monis");
 
 	Menu* menu = new Menu(1280, 800);
 
-	menu->showWindow(window);
+	menu->options();
+	
+	while (window.isOpen()) {
 
+	menu->showMenu(window);
+	}
 	return 0;
 
 }
