@@ -10,7 +10,7 @@ class Game
 public:
 	Game();
 
-	void playGame(RenderWindow &);
+	void playGame(RenderWindow *);
 
 };
 

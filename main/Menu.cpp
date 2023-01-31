@@ -4,7 +4,6 @@ Menu::Menu(float width, float hight) {
 
 	this->width = width;
 	this->hight = hight;
-
 }
 
 Menu::~Menu() {
@@ -41,18 +40,16 @@ void Menu::options() {
 	mainMenu[2].setPosition(Vector2f(width / 4 - 50, hight / (Max_menu + 1) * 3));
 
 	mainMenuSelected = 0;
-
 }
-
-void Menu::draw(RenderWindow& window) {
-
-
+void Menu::draw(RenderWindow *window) {
 
 	for (int i = 0; i < 3; i++) {
 
-		window.draw(mainMenu[i]);
+		window->draw(mainMenu[i]);
 	}
 }
+
+/*
 
 void Menu::moveDowm() {
 
@@ -84,18 +81,6 @@ void Menu::moveUp() {
 	}
 }
 
-void Menu::buttons(RenderWindow &window) {
-
-	button.setPosition(200, 250);
-	button.setSize(Vector2f(100.f, 00.f));
-	button.setScale(Vector2f(0.5f, 0.5f));
-	button.setFillColor(Color::Blue);
-	button.setOutlineColor(Color::Green);
-	button.setOutlineThickness(1.f);
-	window.draw(button);
-
-}
-
 void Menu::useKeyboard(RenderWindow& window) {
 
 	Event event;
@@ -106,7 +91,7 @@ void Menu::useKeyboard(RenderWindow& window) {
 			window.close();
 		}
 		if (event.type == Event::KeyReleased) {
-	
+
 			if (event.key.code == Keyboard::Up) {
 				moveUp();
 				break;
@@ -115,65 +100,161 @@ void Menu::useKeyboard(RenderWindow& window) {
 				moveDowm();
 				break;
 			}
+			if (event.key.code == Keyboard::Return && selectOption()==1) {
+				game->playGame(&window);
+			}
 		}
 	}
 }
 
-void Menu::useMouse(RenderWindow& window) {
-
-		std::cout << "Mouse pos: " 
-		<< Mouse::getPosition(window).x << "  " 
-		<< Mouse::getPosition(window).y << "\n ";
-
-}
-
-void Menu::selectOption(RenderWindow &window) {
+int Menu::selectOption() {
 
 	//select option
 	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 0) {
 
-		game->playGame(window);
+		return 1;
 
 	}
 
 	//slect options
-	
+
 	 if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 1) {
 
 		std::cout << "Options";
 	}
 
-	
+
 	//Salir
 	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 2) {
 
 		exit(0);
 	}
 }
+*/
 
-void Menu::showMenu(RenderWindow& window) {
 
-	Texture textura;
-	if (!textura.loadFromFile("kratos.jpg"))
-	{
-		std::cout << "No se encontro la imagen";;
+
+RectangleShape Menu::buttonPlay(RenderWindow *window) {
+
+	RectangleShape button;
+
+	button.setPosition(width / 4 - 50, hight / (Max_menu + 1));
+	button.setSize(Vector2f(253.f, 115.f));
+	button.setScale(Vector2f(0.5f, 0.5f));
+	button.setOutlineThickness(1.f);
+	
+	return button;
+}
+
+RectangleShape Menu::buttonOptions(RenderWindow* window) {
+
+	RectangleShape button;
+
+	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 2);
+	button.setSize(Vector2f(460.f, 115.f));
+	button.setScale(Vector2f(0.5f, 0.5f));
+	button.setOutlineThickness(1.f);
+
+	return button;
+}
+
+RectangleShape Menu::buttonExit(RenderWindow* window) {
+
+	RectangleShape button;
+
+	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 3);
+	button.setSize(Vector2f(253.f, 115.f));
+	button.setScale(Vector2f(0.5f, 0.5f));
+	button.setOutlineThickness(1.f);
+
+	return button;
+}
+
+void Menu::useMouse(Sprite imagenDeMenu ) {
+
+	Event event;
+	while (window->pollEvent(event)) {
+
+		if (event.type == Event::Closed) {
+			window->close();
+		}
+		if (event.type == Event::MouseButtonPressed) {
+			if (event.mouseButton.button == Mouse::Left) {
+
+				Vector2i mousePosition = Mouse::getPosition(*window);
+
+				pressedPlay(imagenDeMenu, mousePosition);
+				pressedOptions(imagenDeMenu, mousePosition);
+				pressedExit(imagenDeMenu, mousePosition);
+			}
+		}
+	}
+}
+
+void Menu::pressedPlay(Sprite imagenDeMenu, Vector2i mousePosition) {
+
+	if (buttonPlay(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+		std::cout << "Play button clicked!" << std::endl;
+		window->clear();
+		game->playGame(window);
 	}
 
-	// Crea un objeto Sprite con la textura cargada
-	Sprite imagenDeMenu;
-	imagenDeMenu.setTexture(textura);
+}
 
-	useKeyboard(window);
-	//useMouse(window);
+void Menu::pressedOptions(Sprite imagenDeMenu, Vector2i mousePosition) {
 
-	selectOption(window);
+	if (buttonOptions(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+		std::cout << "Options button clicked!" << std::endl;
+		window->clear();
+	}
 
-	window.clear();
-	window.draw(imagenDeMenu);
-	draw(window);
-	window.display();
+}
 
-	std::cout << "*";
-	
+void Menu::pressedExit(Sprite imagenDeMenu, Vector2i mousePosition) {
 
+	if (buttonExit(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+		std::cout << "Exit button clicked!" << std::endl;
+		window->clear();
+		exit(0);
+	}
+
+}
+
+void Menu::checkTexture(Texture& texture) {
+
+	if (!texture.loadFromFile("kratos.jpg")){
+
+		std::cout << "No se encontro la imagen";
+	}
+}
+
+void Menu::showMenu() {
+
+	window = new RenderWindow(VideoMode(1280, 800), "Battle of Monis");
+
+	Texture *texture = new Texture();
+
+	checkTexture(*texture);
+
+	Sprite imagenDeMenu(*texture);
+
+	window->setFramerateLimit(60);
+
+	options();
+
+	while (window->isOpen()) {
+
+		buttonPlay(window);
+		
+		//useKeyboard(*window);
+		useMouse(imagenDeMenu);
+			
+		window->clear();
+		window->draw(imagenDeMenu);
+		draw(window);
+		window->display();
+
+		std::cout << "*";
+	}
+	delete texture;
 }

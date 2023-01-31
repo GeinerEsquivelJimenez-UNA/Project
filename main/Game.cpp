@@ -4,9 +4,8 @@ Game::Game() {
 
 }
 
-void Game::playGame(RenderWindow & window) {
+void Game::playGame(RenderWindow* window) {
 
-	std::cout << "hola";
 	Texture textura;
 
 	if (!textura.loadFromFile("gamer.png"))
@@ -14,20 +13,28 @@ void Game::playGame(RenderWindow & window) {
 		std::cout << "No se encontro la imagen";;
 	}
 
-	// Crea un objeto Sprite con la textura cargada
-	Sprite imagenDeJuego;
-	imagenDeJuego.setTexture(textura);
+	Sprite imagenDeJuego(textura);
 
+	window->setFramerateLimit(60);
 
-	while (window.isOpen()) {
+    while (window->isOpen()) {
+        
+        Event event;
+        while (window->pollEvent(event)) {
+       
+            if (event.type == sf::Event::Closed)
+                window->close();
 
-	window.clear();
-	window.draw(imagenDeJuego);
-	window.display();
+            
+        }
 
-	std::cout << "bye";
-	}
+        window->clear();
 
+        window->draw(imagenDeJuego);
 
-
+        window->display();
+    }
+  
 }
+
+

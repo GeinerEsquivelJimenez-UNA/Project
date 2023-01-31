@@ -16,7 +16,8 @@ private:
 	Game* game;
 	Font* font;
 	Text mainMenu[Max_menu];
-	RectangleShape button;
+	RenderWindow* window;
+
 
 public:
 
@@ -26,12 +27,22 @@ public:
 
 	void options();
 
-	void draw(RenderWindow& window);
+	void draw(RenderWindow*);
 	void moveDowm();
 	void moveUp();
-	void buttons(RenderWindow&);
+	RectangleShape buttonPlay(RenderWindow *);
+	RectangleShape buttonOptions(RenderWindow*);
+	RectangleShape buttonExit(RenderWindow*);
+
+
+
 	void useKeyboard(RenderWindow&);
-	void useMouse(RenderWindow&);
-	void selectOption(RenderWindow&);
-	void showMenu(RenderWindow&);
+	int selectOption();
+
+	void useMouse(Sprite);
+	void pressedPlay(Sprite,Vector2i);
+	void pressedOptions(Sprite, Vector2i);
+	void pressedExit(Sprite, Vector2i);
+	void checkTexture(Texture &);
+	void showMenu();
 };

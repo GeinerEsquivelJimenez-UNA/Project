@@ -1,2 +1,56 @@
 ﻿  Menu.cpp
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(196,82): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(196,65): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(206,85): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(206,68): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(215,82): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\Menu.cpp(215,65): warning C4244: 'argumento': conversión de 'T' a 'T'; posible pérdida de datos
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
   main.vcxproj -> C:\Users\tony rojas\Documents\Visual Studio 2022\GitHub\ProjectCardGame\Project\main\x64\Debug\main.exe

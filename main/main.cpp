@@ -8,16 +8,10 @@ using namespace sf;
 
 int main() {
 
-	RenderWindow window(VideoMode(1280, 800), "Battle of Monis");
-
 	Menu* menu = new Menu(1280, 800);
 
-	menu->options();
-	
-	while (window.isOpen()) {
+	menu->showMenu();
 
-	menu->showMenu(window);
-	}
 	return 0;
 
 }
