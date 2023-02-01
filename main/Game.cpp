@@ -10,7 +10,7 @@ void Game::playGame(RenderWindow* window) {
 
 	if (!textura.loadFromFile("gamer.png"))
 	{
-		std::cout << "No se encontro la imagen";;
+		std::cout << "No se encontro la imagen";
 	}
 
 	Sprite imagenDeJuego(textura);

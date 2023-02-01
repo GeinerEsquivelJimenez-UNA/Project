@@ -17,6 +17,7 @@ private:
 	Font* font;
 	Text mainMenu[Max_menu];
 	RenderWindow* window;
+	RectangleShape button;
 
 
 public:
@@ -28,16 +29,9 @@ public:
 	void options();
 
 	void draw(RenderWindow*);
-	void moveDowm();
-	void moveUp();
 	RectangleShape buttonPlay(RenderWindow *);
 	RectangleShape buttonOptions(RenderWindow*);
 	RectangleShape buttonExit(RenderWindow*);
-
-
-
-	void useKeyboard(RenderWindow&);
-	int selectOption();
 
 	void useMouse(Sprite);
 	void pressedPlay(Sprite,Vector2i);

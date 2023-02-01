@@ -49,94 +49,7 @@ void Menu::draw(RenderWindow *window) {
 	}
 }
 
-/*
-
-void Menu::moveDowm() {
-
-	if (mainMenuSelected + 1 <= Max_menu) {
-
-		mainMenu[mainMenuSelected].setFillColor(Color::Black);
-
-		mainMenuSelected++;
-
-		if (mainMenuSelected == 3) {
-			mainMenuSelected = 0;
-		}
-		mainMenu[mainMenuSelected].setFillColor(Color::Red);
-	}
-}
-
-void Menu::moveUp() {
-
-	if (mainMenuSelected - 1 >= -1) {
-
-		mainMenu[mainMenuSelected].setFillColor(Color::Black);
-
-		mainMenuSelected--;
-
-		if (mainMenuSelected == -1) {
-			mainMenuSelected = 2;
-		}
-		mainMenu[mainMenuSelected].setFillColor(Color::Red);
-	}
-}
-
-void Menu::useKeyboard(RenderWindow& window) {
-
-	Event event;
-
-	while (window.pollEvent(event)) {
-
-		if (event.type == Event::Closed) {
-			window.close();
-		}
-		if (event.type == Event::KeyReleased) {
-
-			if (event.key.code == Keyboard::Up) {
-				moveUp();
-				break;
-			}
-			if (event.key.code == Keyboard::Down) {
-				moveDowm();
-				break;
-			}
-			if (event.key.code == Keyboard::Return && selectOption()==1) {
-				game->playGame(&window);
-			}
-		}
-	}
-}
-
-int Menu::selectOption() {
-
-	//select option
-	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 0) {
-
-		return 1;
-
-	}
-
-	//slect options
-
-	 if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 1) {
-
-		std::cout << "Options";
-	}
-
-
-	//Salir
-	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 2) {
-
-		exit(0);
-	}
-}
-*/
-
-
-
 RectangleShape Menu::buttonPlay(RenderWindow *window) {
-
-	RectangleShape button;
 
 	button.setPosition(width / 4 - 50, hight / (Max_menu + 1));
 	button.setSize(Vector2f(253.f, 115.f));
@@ -148,19 +61,16 @@ RectangleShape Menu::buttonPlay(RenderWindow *window) {
 
 RectangleShape Menu::buttonOptions(RenderWindow* window) {
 
-	RectangleShape button;
-
 	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 2);
 	button.setSize(Vector2f(460.f, 115.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
+	button.setFillColor(Color::Blue);
 
 	return button;
 }
 
 RectangleShape Menu::buttonExit(RenderWindow* window) {
-
-	RectangleShape button;
 
 	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 3);
 	button.setSize(Vector2f(253.f, 115.f));
@@ -232,6 +142,11 @@ void Menu::showMenu() {
 
 	window = new RenderWindow(VideoMode(1280, 800), "Battle of Monis");
 
+
+	RectangleShape nose = buttonOptions(window);
+
+
+
 	Texture *texture = new Texture();
 
 	checkTexture(*texture);
@@ -245,12 +160,12 @@ void Menu::showMenu() {
 	while (window->isOpen()) {
 
 		buttonPlay(window);
-		
-		//useKeyboard(*window);
+
 		useMouse(imagenDeMenu);
 			
 		window->clear();
 		window->draw(imagenDeMenu);
+		window->draw(nose);
 		draw(window);
 		window->display();
 
