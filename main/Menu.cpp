@@ -14,7 +14,7 @@ void Menu::options() {
 
 	Font* font = new Font();
 
-	if (!font->loadFromFile("stocky.ttf")) {
+	if (!font->loadFromFile("F.ttf")) {
 		std::cout << "	Error";
 	}
 
@@ -23,21 +23,21 @@ void Menu::options() {
 	mainMenu[0].setFillColor(Color::Red);
 	mainMenu[0].setString("Play");
 	mainMenu[0].setCharacterSize(50);
-	mainMenu[0].setPosition(Vector2f(width / 4 - 50, hight / (Max_menu + 1)));
+	mainMenu[0].setPosition(Vector2f(width / 2.1 - 50, hight / (Max_menu + 1)));
 
 	//options
 	mainMenu[1].setFont(*font);
 	mainMenu[1].setFillColor(Color::Black);
-	mainMenu[1].setString("Options");
+	mainMenu[1].setString("Continue");
 	mainMenu[1].setCharacterSize(50);
-	mainMenu[1].setPosition(Vector2f(width / 4 - 50, hight / (Max_menu + 1) * 2));
+	mainMenu[1].setPosition(Vector2f(width / 2.3 - 50, hight / (Max_menu + 1) * 2));
 
 	//Exit
 	mainMenu[2].setFont(*font);
 	mainMenu[2].setFillColor(Color::Black);
 	mainMenu[2].setString("Exit");
 	mainMenu[2].setCharacterSize(50);
-	mainMenu[2].setPosition(Vector2f(width / 4 - 50, hight / (Max_menu + 1) * 3));
+	mainMenu[2].setPosition(Vector2f(width / 2.1 - 50, hight / (Max_menu + 1) * 3));
 
 	mainMenuSelected = 0;
 }
@@ -49,120 +49,36 @@ void Menu::draw(RenderWindow *window) {
 	}
 }
 
-/*
-
-void Menu::moveDowm() {
-
-	if (mainMenuSelected + 1 <= Max_menu) {
-
-		mainMenu[mainMenuSelected].setFillColor(Color::Black);
-
-		mainMenuSelected++;
-
-		if (mainMenuSelected == 3) {
-			mainMenuSelected = 0;
-		}
-		mainMenu[mainMenuSelected].setFillColor(Color::Red);
-	}
-}
-
-void Menu::moveUp() {
-
-	if (mainMenuSelected - 1 >= -1) {
-
-		mainMenu[mainMenuSelected].setFillColor(Color::Black);
-
-		mainMenuSelected--;
-
-		if (mainMenuSelected == -1) {
-			mainMenuSelected = 2;
-		}
-		mainMenu[mainMenuSelected].setFillColor(Color::Red);
-	}
-}
-
-void Menu::useKeyboard(RenderWindow& window) {
-
-	Event event;
-
-	while (window.pollEvent(event)) {
-
-		if (event.type == Event::Closed) {
-			window.close();
-		}
-		if (event.type == Event::KeyReleased) {
-
-			if (event.key.code == Keyboard::Up) {
-				moveUp();
-				break;
-			}
-			if (event.key.code == Keyboard::Down) {
-				moveDowm();
-				break;
-			}
-			if (event.key.code == Keyboard::Return && selectOption()==1) {
-				game->playGame(&window);
-			}
-		}
-	}
-}
-
-int Menu::selectOption() {
-
-	//select option
-	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 0) {
-
-		return 1;
-
-	}
-
-	//slect options
-
-	 if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 1) {
-
-		std::cout << "Options";
-	}
-
-
-	//Salir
-	if (Keyboard::isKeyPressed(Keyboard::Key::Return) && mainMenuSelected == 2) {
-
-		exit(0);
-	}
-}
-*/
-
 
 
 RectangleShape Menu::buttonPlay(RenderWindow *window) {
 
-	RectangleShape button;
+	
 
-	button.setPosition(width / 4 - 50, hight / (Max_menu + 1));
-	button.setSize(Vector2f(253.f, 115.f));
+	button.setPosition(width / 2.1 - 50, hight / (Max_menu + 1));
+	button.setSize(Vector2f(295.f, 115.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
 	
 	return button;
 }
 
-RectangleShape Menu::buttonOptions(RenderWindow* window) {
+RectangleShape Menu::buttonContinue(RenderWindow* window) {
 
-	RectangleShape button;
+	
 
-	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 2);
-	button.setSize(Vector2f(460.f, 115.f));
+	button.setPosition(width / 2.3 - 50, hight / (Max_menu + 1) * 2);
+	button.setSize(Vector2f(570.f, 115.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
-
 	return button;
 }
 
 RectangleShape Menu::buttonExit(RenderWindow* window) {
 
-	RectangleShape button;
+	
 
-	button.setPosition(width / 4 - 50, hight / (Max_menu + 1) * 3);
+	button.setPosition(width / 2.1 - 50, hight / (Max_menu + 1) * 3);
 	button.setSize(Vector2f(253.f, 115.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
@@ -184,7 +100,7 @@ void Menu::useMouse(Sprite imagenDeMenu ) {
 				Vector2i mousePosition = Mouse::getPosition(*window);
 
 				pressedPlay(imagenDeMenu, mousePosition);
-				pressedOptions(imagenDeMenu, mousePosition);
+				pressedContinue(imagenDeMenu, mousePosition);
 				pressedExit(imagenDeMenu, mousePosition);
 			}
 		}
@@ -201,9 +117,9 @@ void Menu::pressedPlay(Sprite imagenDeMenu, Vector2i mousePosition) {
 
 }
 
-void Menu::pressedOptions(Sprite imagenDeMenu, Vector2i mousePosition) {
+void Menu::pressedContinue(Sprite imagenDeMenu, Vector2i mousePosition) {
 
-	if (buttonOptions(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+	if (buttonContinue(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
 		std::cout << "Options button clicked!" << std::endl;
 		window->clear();
 	}
@@ -222,7 +138,7 @@ void Menu::pressedExit(Sprite imagenDeMenu, Vector2i mousePosition) {
 
 void Menu::checkTexture(Texture& texture) {
 
-	if (!texture.loadFromFile("kratos.jpg")){
+	if (!texture.loadFromFile("Fondo.jpg")){
 
 		std::cout << "No se encontro la imagen";
 	}
@@ -231,6 +147,8 @@ void Menu::checkTexture(Texture& texture) {
 void Menu::showMenu() {
 
 	window = new RenderWindow(VideoMode(1280, 800), "Battle of Monis");
+
+	
 
 	Texture *texture = new Texture();
 
@@ -246,15 +164,15 @@ void Menu::showMenu() {
 
 		buttonPlay(window);
 		
-		//useKeyboard(*window);
+		
 		useMouse(imagenDeMenu);
 			
 		window->clear();
 		window->draw(imagenDeMenu);
 		draw(window);
 		window->display();
-
-		std::cout << "*";
+		
+		
 	}
 	delete texture;
 }
