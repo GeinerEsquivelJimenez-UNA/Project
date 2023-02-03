@@ -19,7 +19,6 @@ private:
 	RenderWindow* window;
 	RectangleShape button;
 
-
 public:
 
 	Menu(float width, float hight);
@@ -30,12 +29,12 @@ public:
 
 	void draw(RenderWindow*);
 	RectangleShape buttonPlay(RenderWindow *);
-	RectangleShape buttonOptions(RenderWindow*);
+	RectangleShape buttonContinue(RenderWindow*);
 	RectangleShape buttonExit(RenderWindow*);
 
 	void useMouse(Sprite);
 	void pressedPlay(Sprite,Vector2i);
-	void pressedOptions(Sprite, Vector2i);
+	void pressedContinue(Sprite, Vector2i);
 	void pressedExit(Sprite, Vector2i);
 	void checkTexture(Texture &);
 	void showMenu();
