@@ -32,3 +32,37 @@ int Player::getPoints() {
 
 	return points;
 }
+
+void Player::enterNames(RenderWindow* window) {
+
+	Texture textura;
+
+	if (!textura.loadFromFile("Nombres.jpg"))
+		cout << "No se encontro la imagen";
+	{
+	}
+
+	Sprite enterNames(textura);
+
+	window->setFramerateLimit(60);
+
+	while (window->isOpen()) {
+
+		Event event;
+		while (window->pollEvent(event)) {
+
+			if (event.type == sf::Event::Closed) {
+				window->close();
+			}
+
+		}
+
+		window->clear();
+
+		window->draw(enterNames);
+
+		window->display();
+	}
+
+
+}
