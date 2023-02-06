@@ -4,11 +4,12 @@ Game::Game() {
 
 }
 
-void Game::playGame(RenderWindow* window) {
 
+void Game::playGame(RenderWindow* window) {
+   
 	Texture textura;
 
-	if (!textura.loadFromFile("FondoDeJuego.jpeg"))
+	if (!textura.loadFromFile("Tablero.png"))
 	{
 		std::cout << "No se encontro la imagen";
 	}
@@ -25,20 +26,15 @@ void Game::playGame(RenderWindow* window) {
             if (event.type == sf::Event::Closed) {
                 window->close();
             }
-
  
 
 
         }
 
-
-
         window->clear();
 
         window->draw(imagenDeJuego);
-
-        //card.showCard(window);
-
+  
         window->display();
     }
 

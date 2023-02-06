@@ -3,7 +3,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
-#include <stack>
 
 using namespace sf;
 
@@ -12,21 +11,22 @@ using namespace std;
 class Card
 {
 private:
-	const int imageCount = 54;
-	Sprite* cards;
-
+    Texture texture;
+    Sprite sprite;
 public:
 
-	Card();
+    Card(string &);
 
-	void showCard(RenderWindow*);
+    void setTexture(Texture);
 
-	void loadCards();
+    Texture getTexture();
 
-	void swap(Sprite&, Sprite&);
+    void setSprite(Sprite);
 
-	void mixDeck();
+    Sprite getSprite();
 
+    
+	
 
 
 };

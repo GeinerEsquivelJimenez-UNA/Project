@@ -8,26 +8,16 @@
 using namespace sf;
 using namespace std;
 
-class Deck
-{
+class Deck{
 
 private:
-	stack<Card> deckOne;
-	stack<Card> deckTwo;
-	stack<Card> deckThree;
 	Card *cards;
+	Sprite *sprites[];
 
 public:
 
-	Deck();
+	Deck(Card*);
 
-	void firstDeck();
-
-	void secondDeck();
-
-	void thirdDeck();
-
-	void stacks();
 
 };
 

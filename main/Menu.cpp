@@ -23,22 +23,21 @@ void Menu::options() {
 	mainMenu[0].setFillColor(Color::Red);
 	mainMenu[0].setString("Play");
 	mainMenu[0].setCharacterSize(50);
-	mainMenu[0].setPosition(Vector2f(width / 2.1 - 50, hight / (Max_menu + 1)));
+	mainMenu[0].setPosition(Vector2f(width / 2.1 - 35, hight / (Max_menu + 1) -60));
 
 	//Continue
 	mainMenu[1].setFont(*font);
 	mainMenu[1].setFillColor(Color::Black);
 	mainMenu[1].setString("Continue");
 	mainMenu[1].setCharacterSize(50);
-	mainMenu[1].setPosition(Vector2f(width / 2.3 - 50, hight / (Max_menu + 1) * 2));
+	mainMenu[1].setPosition(Vector2f(width / 2.3 - 50, hight / (Max_menu + 1) + 140));
 
 	//Exit
 	mainMenu[2].setFont(*font);
 	mainMenu[2].setFillColor(Color::Black);
 	mainMenu[2].setString("Exit");
 	mainMenu[2].setCharacterSize(50);
-	mainMenu[2].setPosition(Vector2f(width / 2.1 - 50, hight / (Max_menu + 1) * 3));
-
+	mainMenu[2].setPosition(Vector2f(width / 2.1 - 35, hight / (Max_menu + 1) +350));
 }
 void Menu::draw(RenderWindow *window) {
 
@@ -51,20 +50,17 @@ void Menu::draw(RenderWindow *window) {
 
 RectangleShape Menu::buttonPlay(RenderWindow *window) {
 
-	
-
-	button.setPosition(width / 2.1 - 50, hight / (Max_menu + 1));
-	button.setSize(Vector2f(295.f, 115.f));
+	button.setPosition(width / 2.1 - 140, hight / (Max_menu + 1) - 80);
+	button.setSize(Vector2f(740.f, 200.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
-	
 	return button;
 }
 
 RectangleShape Menu::buttonContinue(RenderWindow* window) {
 
-	button.setPosition(width / 2.3 - 50, hight / (Max_menu + 1) * 2);
-	button.setSize(Vector2f(570.f, 115.f));
+	button.setPosition(width / 2.1 - 140, hight / (Max_menu + 1) + 120);
+	button.setSize(Vector2f(740.f, 200.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
 	return button;
@@ -72,12 +68,10 @@ RectangleShape Menu::buttonContinue(RenderWindow* window) {
 
 RectangleShape Menu::buttonExit(RenderWindow* window) {
 
-
-	button.setPosition(width / 2.1 - 50, hight / (Max_menu + 1) * 3);
-	button.setSize(Vector2f(253.f, 115.f));
+	button.setPosition(width / 2.1 - 140, hight / (Max_menu + 1) + 325);
+	button.setSize(Vector2f(740.f, 200.f));
 	button.setScale(Vector2f(0.5f, 0.5f));
 	button.setOutlineThickness(1.f);
-
 	return button;
 }
 
@@ -106,10 +100,8 @@ void Menu::pressedPlay(Sprite imagenDeMenu, Vector2i mousePosition) {
 
 	if (buttonPlay(window).getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
 		std::cout << "Play button clicked!" << std::endl;
-		window->clear();
 		game->playGame(window);
 	}
-
 }
 
 void Menu::pressedContinue(Sprite imagenDeMenu, Vector2i mousePosition) {
@@ -118,7 +110,6 @@ void Menu::pressedContinue(Sprite imagenDeMenu, Vector2i mousePosition) {
 		std::cout << "Options button clicked!" << std::endl;
 		window->clear();
 	}
-
 }
 
 void Menu::pressedExit(Sprite imagenDeMenu, Vector2i mousePosition) {
@@ -128,12 +119,11 @@ void Menu::pressedExit(Sprite imagenDeMenu, Vector2i mousePosition) {
 		window->clear();
 		exit(0);
 	}
-
 }
 
 void Menu::checkTexture(Texture& texture) {
 
-	if (!texture.loadFromFile("Fondo.jpg")){
+	if (!texture.loadFromFile("Submenu.png")){
 
 		std::cout << "No se encontro la imagen";
 	}
@@ -161,6 +151,7 @@ void Menu::showMenu() {
 			
 		window->clear();
 		window->draw(imagenDeMenu);
+		
 		draw(window);
 		window->display();
 		

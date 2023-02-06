@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Card.h"
+#include "List.h"
 
 using namespace sf;
 
@@ -10,7 +11,8 @@ class Game
 {
 
 private:
-	Card* card;
+	Card* cards;
+	
 public:
 	Game();
 

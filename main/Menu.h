@@ -3,6 +3,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "Card.h"
+#include "List.h"
 
 using namespace sf;
 
@@ -18,6 +20,7 @@ private:
 	Text mainMenu[Max_menu];
 	RenderWindow* window;
 	RectangleShape button;
+	Card* cards;
 
 public:
 

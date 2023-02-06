@@ -16,9 +16,5 @@ public:
 	string getName();
 	int getPoints();
 
-
-
-
-
 };
 
